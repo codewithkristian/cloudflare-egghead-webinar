@@ -1,56 +1,968 @@
+import {TwitterTweetEmbed} from 'react-twitter-embed'
+
 <SlidePage>
     
 <Cover>
 
-# NextJS MDX Deck
+# Exploring the Cloudflare Developer Ecosystem
     
-Create presentations using Next & React & MDX.
-
 </Cover>
 
 ---
 
-1. Clone this project.
-1. Write some MDX.
-1. Export as [static app](https://nextjs.org/docs/advanced-features/static-html-export)
-1. ???
-1. Profit as a speaker 💰💰💰
+# Kristian (@signalnerve)
 
-<SpeakerNotes>
-    
-Private notes here. 
-
-You can write an extremely long note and it'll still display inside of the presenter mode.
-
-# Even Markdown!
-
-- Just
-- do
-- it
-
-</SpeakerNotes>
-
+## Developer advocate @cloudflare
+## Instructor @eggheadio
+## Writing/making videos @ [bytesized.xyz](https://www.bytesized.xyz)
 
 ---
 
-> Inscrutable icons litter the face of the devices even though the research
-> community has long demonstrated that people cannot remember the meaning of
-> more than a small number of icons […] Who can remember what each icon
-> means? Not me.
-> <cite>Don Norman</cite>
+# Cloudflare
+
+> Protect and accelerate your websites, apps, and teams.
 
 ---
 
-# 🤫
+# Cloudflare
+
+> ~~Protect and accelerate your websites, apps, and teams.~~ 
+
+> Use our servers around the world to make your life as a developer easier!
 
 ---
 
-## Slides are written in MDX!
+# Network basics
 
-And code is highlighted using `react-syntax-highlighter`.
+> **Origin**: a server, often located in a datacenter, that hosts your application
 
-```js
-const variable = someFunction();
+> **Client**: a user of your site, such as a human on a mobile phone, or another computer
+
+> **The edge**: _Cloudflare's big advantage..._
+
+---
+
+# What is "the edge"?
+
+![Cloudflare's edge network](https://kmf.lol/2021/06/chrome_Fy99PIFFym.png)
+
+<figcaption>Cloudflare's 200+ edge servers around the world</figcaption>
+
+---
+
+# Each "edge" server will...
+
+- Block malicious clients
+- Optimize requests
+- Secure your origin
+- And more! (that's the purpose of this talk)
+
+---
+
+![Actual latency](https://kmf.lol/2021/06/chrome_cEOhrR599x.png)
+
+<figcaption>Actual latency numbers, captured from <a href="https://workers.dev">workers.dev</a></figcaption>
+
+---
+
+# Once you have an edge network infrastructure, there's a lot you can do for developers
+
+---
+
+# How we'll cover Cloudflare's products
+
+## _(for developers)_
+
+- Basics
+- End-user tools
+- Must-try
+- Platform-defining
+
+---
+
+![Cloudflare Developer Suite](https://kmf.lol/2021/06/chrome_kfqjqy5qrt.png)
+
+<figcaption><a href="https://developers.cloudflare.com">developers.cloudflare.com</a></figcaption>
+
+---
+
+# Basics
+
+## Things that you need to build web apps
+
+- Analytics
+- CDN/Caching
+- DNS
+- Firewall
+- Registrar
+- SSL
+
+---
+
+# Analytics
+
+## **What is it:** free analytics for your domains
+
+## **Pricing:** free
+
+## **How it works:** analytics are automatically captured at the edge, and made available in the Cloudflare dashboard
+
+---
+
+# Analytics
+
+![Analytics](https://kmf.lol/2021/06/chrome_pYdx9fIhql.png)
+
+<figcaption>
+  Request traffic
+</figcaption>
+
+---
+
+# Analytics
+
+![Regional Analytics](https://kmf.lol/2021/06/chrome_zf3a4Lzw24.png)
+
+<figcaption>
+  Analytics by region
+</figcaption>
+
+---
+
+# Web Analytics
+
+## **What is it:** Google Analytics-like, privacy-first solution - **without needing to move your site to Cloudflare**
+
+## **Pricing:** free
+
+## **How it works:** embeddable JavaScript snippet that runs when your application is loaded in the client
+
+---
+
+# Web Analytics
+
+![Web Analytics](https://kmf.lol/2021/06/chrome_Ax5JwZ9RPw.png)
+
+<figcaption>
+  Web Analytics dashboard
+</figcaption>
+
+---
+
+# Web Analytics
+
+![Web Analytics Visits](https://kmf.lol/2021/06/chrome_0jjegpfdF5.png)
+
+<figcaption>
+  Web Analytics breakdown
+</figcaption>
+
+---
+
+# CDN/Caching
+
+## **What is it:** Automatic caching on Cloudflare's edge servers for static assets
+
+## **Pricing:** free
+
+## **How it works:** automatically - no configuration required
+
+---
+
+# CDN/Caching
+
+## Cached based on things like `Cache-Control` headers
+
+![Cache stats](https://kmf.lol/2021/06/chrome_oUlrrwQzDT.png)
+
+---
+
+# DNS
+
+## **What is it:** _Name resolution_ for your domains
+
+## **Pricing:** free
+
+## **How it works:** Cloudflare's nameservers resolve your domains, subdomains, and anything else - allowing you to set up custom domains, mail servers, and more
+
+---
+
+# How to set up Cloudflare DNS
+
+## #1 - Point your domain's **nameservers** to Cloudflare
+
+![Nameservers config](https://kmf.lol/2021/06/chrome_KoXmGOBNY0.png)
+
+<figcaption>
+  (Your domain's nameservers will be different)
+</figcaption>
+
+---
+
+# How to set up Cloudflare DNS
+
+## #2 - Add your domain to Cloudflare
+
+![Add Site](https://kmf.lol/2021/06/chrome_4rvU5rwavg.png)
+
+---
+
+# How to set up Cloudflare DNS
+
+## #3 - Configure your DNS records!
+
+![DNS Records](https://kmf.lol/2021/06/chrome_v0kxaPQlan.png)
+
+---
+
+# Firewall
+
+## **What is it:** Automatic firewall and _challenges_
+
+## **Pricing:** free
+
+## **How it works:** Cloudflare looks at incoming requests, and issues a Captcha if the client looks suspicious
+
+---
+
+# Firewall
+
+![Challenge](https://kmf.lol/2021/06/image1.png)
+
+<figcaption>Cloudflare challenge page</figcaption>
+
+---
+
+# Firewall
+
+![Firewall logging](https://kmf.lol/2021/06/chrome_ZHxRxiuymM.png)
+
+<figcaption>Firewall logging</figcaption>
+
+---
+
+# Registrar
+
+## **What is it:** Domain transfers (and soon, registration) to Cloudflare
+
+## **Pricing:** per domain
+
+## **How it works:** Transfer domains to Cloudflare, and renew them at yearly prices much cheaper than other domain resellers
+
+---
+
+# Registrar
+
+![Registrar transfer](https://kmf.lol/2021/06/chrome_c6eWvdOn7u.png)
+
+<figcaption>Transferring existing domains to Cloudflare</figcaption>
+
+---
+
+# Registrar
+
+- Free WHOIS protection ($xx/year saved on most providers)
+- Priced based on wholesale domain charge (no mark-up)
+
+---
+
+# SSL
+
+## **What is it:** Free encryption for web traffic to your domains
+
+## **Pricing:** Free (!)
+
+## **How it works:** Cloudflare encrypts traffic between our edge servers and your client, and more
+
+---
+
+# SSL
+
+## SSL certificates used to be costly!
+
+## Cloudflare made it free to run HTTPS on your site (this is why I signed up in the first place)
+
+---
+
+# SSL
+
+![SSL Types](https://kmf.lol/2021/06/hykSe13czO.gif)
+
+<figcaption>Progressive SSL encryption in Cloudflare's Dashboard</figcaption>
+
+---
+
+# "Progressive SSL encryption"
+# Flexible, Full, Full (Strict)
+
+## This allows you to do the important thing - **encrypt your user's connection** - and build better security between Cloudflare and your origin over time
+
+---
+
+# Must-try
+
+## My favorite things in the ecosystem
+
+- Workers
+- Pages
+- Cloudflare for Teams
+- Cloudflare Tunnel
+- Randomness Beacon
+- Stream
+
+---
+
+# Workers
+
+## **What is it:** Serverless functions
+
+## **Pricing:** Free up to 100k requests/day, $0.50 per million requests/month
+
+## **How it works:** Deploy serverless code to our servers, and we'll handle the rest
+
+---
+
+# Workers
+
+- Approachable developer experience (DX) - service workers API, command-line first tooling
+- Cool platform/runtime features 
+- No hidden charges or pricing schemes
+
+---
+
+# Workers use-cases
+
+## Authorization/authentication middleware
+## Internationalization
+## Serverless API
+## Utility functions (connect to other SaaS tools)
+## Full applications
+
+---
+
+# Built with Workers: Status Page
+
+<div style={{ display: 'flex', marginTop: '2rem' }}>
+
+<img src="https://cdn.sanity.io/images/0s2zavz0/production/affd6f66237009edbe4625f7bac2d9ac43de11cc-1532x1036.png?w=1532&h=1036&fit=crop&fm=webp" style={{width: '50%', height: 'auto'}} />
+
+<div>
+
+- UI rendered in Workers
+- Data stored in Workers KV
+- Cron tasks to check website status also in Workers
+
+</div>
+
+</div>
+
+---
+
+# Built with Workers: uuid.rocks
+
+```bash
+$ curl https://uuid.rocks/plain # -> aba0e360-1e04-41b3-91a0-1f2263e1e0fb
 ```
 
+- Generating UUIDs at the edge
+- 19 million UUIDs generated at time of writing
+- ~5ms response time*
+
+<figcaption>* When used inside of another Worker - see workers.dev for average client latency</figcaption>
+
+---
+
+# Built with Workers: Durable World
+
+<TwitterTweetEmbed tweetId="1397577226087018499" options={{ align: 'center', width: 700 }} />
+
+---
+
+# Built with Workers: Durable World
+
+- UI deployed with Cloudflare Pages (more on that in a bit!)
+- Game state stored with Durable Objects
+- Game state synced between frontend UI and Workers with WebSockets
+
+---
+
+# Workers Platform
+
+- Cache API
+- HTMLRewriter
+- Scheduled Workers
+- WebSockets
+- Workers KV
+- Workers Durable Objects
+
+---
+
+# Cache API
+
+## Manage the Cloudflare Cache from inside a Worker
+
+```js
+async function handleRequest(event) {
+  const cacheKey = new Request(event.request.url.toString(), event.request)
+  const cache = caches.default
+
+  let response = await cache.match(cacheKey)
+
+  if (!response) {
+    response = await fetch(event.request)
+    event.waitUntil(cache.put(cacheKey, response.clone()))
+  }
+  return response
+}
+```
+
+---
+
+# HTMLRewriter
+
+## Streaming HTML parser and rewriter
+
+```js
+const rewriter = new HTMLRewriter()
+  .on("a", new HTTPSRewriter())
+
+class HTTPSRewriter {
+  element(element) {
+    if (element.getAttribute("href")) {
+      element.setAttribute("href", attribute.replace("http", "https"))
+    }
+  }
+}
+
+async function handleRequest(req) {
+  return rewriter.transform(await fetch(req)
+}
+```
+
+---
+
+# Scheduled Workers
+## Run your Workers every hour, every day, etc.
+
+![Cron Triggers](https://kmf.lol/2021/06/workers-schedule-editor.png)
+
+---
+
+# WebSockets
+
+## Build real-time usecases in your Workers functions
+
+![Websockets Demo](https://kmf.lol/2021/06/DN9OV3Phwc.gif)
+
+---
+
+# Workers KV
+
+## Distributed key-value store - **no database needed!**
+
+```js
+await STORE.put("user-1", JSON.stringify({ id: 1, name: "Kristian" }))
+
+// Some time later...
+
+const user = await STORE.get("user-1", { type: "json" })
+console.log(user) // { id: 1, name: "Kristian" }
+```
+
+---
+
+# Workers Durable Objects
+
+## Always-consistent, addressable Worker that can store data & state
+
+---
+
+# Workers KV versus Workers Durable Objects
+
+| Tool | Consistency | Suited for |
+|------|-------------|------------|
+| Workers KV | Eventual | Reads |
+| Workers Durable Objects | Always | Writes |
+
+---
+
+# Pages
+
+## **What is it:** Deploy your static and Jamstack applications on the edge
+
+## **Pricing:** Free, Pro, Business plans
+
+## **How it works:** Connect your Git-based repositories and we'll automatically deploy them
+
+---
+
+# Pages
+
+- Automatic Git-based deploys
+- Rock-solid performance at the edge
+- Deploy previews + access management
+- Unlimited sites, requests, and bandwidth
+
+---
+
+# Deploy previews
+## Shareable URLs for every commit and pull request
+
+![Deploy previews](https://kmf.lol/2021/06/chrome_kg14XUrXo2.png)
+
+---
+
+# Access management
+## Fine-grained permissions for accessing your site
+
+![Access management](https://kmf.lol/2021/06/chrome_aoiqcXvdGT.png)
+
+---
+
+# Pages + Workers
+## Serverless functions won't just live alongside your applications... they can run _before_ your applications
+
+---
+
+# We can continue to build more powerful use-cases with this combo
+
+- "Edge-side" rendering at the edge
+- Personalization/region-based customization
+- Low-latency utility functions for things like payments and authentication
+- the future??? 🤯
+
+---
+
+# Cloudflare for Teams
+
+## **What is it:** Zero-trust security tools
+
+## **Pricing:** Free up to 50 users, Standard + Enterprise per-user pricing for more features
+
+## **How it works:** Access, Gateway, Browser Isolation, Cloudflare Tunnel
+
+---
+
+> **Zero trust security** is an IT security model that requires strict identity verification for every person and device trying to access resources on a private network, regardless of whether they are sitting within or outside of the network perimeter.
+
+---
+
+# Access
+
+![Demo](https://kmf.lol/2021/06/chrome_lamnMeo7w9.png)
+
+<figcaption>
+  Access page for 3k.kristianfreeman.com, a custom subdomain which routes to my local machine at port 3000
+</figcaption>
+
+---
+
+# Access
+
+## Restrict access by...
+
+- Country
+- Emails
+- Emails ending in (e.g. `@cloudflare.com`)
+- IP ranges
+- Access tokens and certificates
+
+---
+
+# Cloudflare Tunnel (`cloudflared`)
+
+## **What is it:** Secure tunnel from Cloudflare's edge into your local servers
+
+## **Pricing:** Free
+
+## **How it works:** Install a precompiled binary (`cloudflared`) and configure it
+
+---
+
+# Cloudflare Tunnel (`cloudflared`)
+
+```bash
+$ cloudflared tunnel --url http://localhost:3000
++-----------------------------------------------------------+
+|  Your free tunnel has started! Visit it:                  |
+|    https://faq-joyce-flights-spokesman.trycloudflare.com  |
++-----------------------------------------------------------+
+```
+
+---
+
+# Cloudflare Tunnel Usecases
+
+1. Expose local development servers to the web (like `ngrok`)
+2. Pair program using Cloudflare Tunnel and Zoom
+3. Run services on a home or dedicated server and make them available via a Cloudflare DNS record
+
+---
+
+# Cloudflare Tunnel for Server Applications
+
+- Grafana logging endpoints
+- Media servers like Plex
+- PostgreSQL databases
+
+---
+
+# Randomness Beacon
+
+## **What is it:** Distributed randomness
+
+## **Pricing:** Free
+
+## **How it works:** API endpoints, client libraries, or CLI
+
+---
+
+# Randomness Beacon
+
+```bash
+$ curl https://drand.cloudflare.com/public/latest | jq
+
+{
+  "round": 922163,
+  "randomness": "0cb445...", # <- Randomness you can rely on!
+  "signature": "97544a...",
+  "previous_signature": "999fba..."
+}
+```
+
+---
+
+# Stream
+
+## **What is it:** Video uploading and hosting
+
+## **Pricing:** $1 per 1k minutes viewed, $5 per 1k minutes of video storage
+
+## **How it works:** Dashboard UI, public documented API
+
+---
+
+# Stream
+
+- Own your video content
+- Save on streaming and storage costs, since videos are on Cloudflare's CDN
+- Re-transmit live streams to multiple outputs (e.g. Twitch, YouTube)
+
+---
+
+# Stream
+
+- Upload videos and stream on your website, internal wiki, etc.
+- Add captions and watermarks to existing videos
+- Secure streaming with JSON Web Tokens
+- Per-video and bulk analytics
+
+---
+
+# End-user tools
+
+## Not just for web developers
+
+- 1.1.1.1
+- HTTP/3
+- WARP Client
+
+---
+
+# 1.1.1.1 (DNS Resolver)
+
+## **What is it:** Lightning-fast DNS resolution for browsers and network devices
+
+## **Pricing:** Free
+
+## **How it works:** Device configuration or app installation
+
+---
+
+# 1.1.1.1 (DNS Resolver)
+
+![1.1.1.1](https://kmf.lol/2021/06/chrome_MbZdWscWVX.png)
+
+---
+
+# HTTP/3
+
+## **What is it:** The next generation of HTTP
+
+## **Pricing:** Free
+
+## **How it works:** Enable in Cloudflare Dashboard
+
+---
+
+# HTTP/3
+
+- Built with a new transport protocol (QUIC)
+- Faster than HTTP/2
+- More reliable than HTTP/2...
+
+---
+
+# HTTP/3
+
+![HTTP/3 Usage](https://kmf.lol/2021/06/chrome_zsjbWRIHlC.png)
+
+<figcaption>and already in use by 12% of the internet</figcaption>
+
+---
+
+# WARP Client 
+
+## **What is it:** VPN protection through Cloudflare's edge
+
+## **Pricing:** Free, monthly subscription for improved performance
+
+## **How it works:** Download clients for Windows/MacOS/iOS/Android
+
+---
+
+# WARP Client
+
+- Free VPN
+- Encrypts your traffic securely through Cloudflare's edge network
+- Route requests between Cloudflare-hosted sites more effectively and with better performance
+
+---
+
+# Platform-defining
+
+## What can we do at the edge that we couldn't do before?
+
+- Automatic Platform Optimization
+- Bots
+- Cloudflare for SaaS
+- Image Resizing
+- Load Balancing
+- Web Application Firewall
+
+---
+
+# Automatic Platform Optimization
+
+## **What is it:** Optimizations for web platforms
+
+## **Pricing:** $5/mo
+
+## **How it works:** Install plugin and configure in Cloudflare Dashboard
+
+---
+
+# Automatic Platform Optimization
+
+## Currently supports WordPress
+## Drastically increase cache rate and site performance by offloading onto Cloudflare's edge network
+
+---
+
+# Bots
+
+## **What is it:** Bot detection and mitigation for your applications
+
+## **Pricing:** Free, Pro, Business, and Enterprise plans
+
+## **How it works:** Configure in the Cloudflare Dashboard
+
+---
+
+# Bots (Free plan)
+
+## Automatic mitigation (challenges) of simple bots
+
+---
+
+# Bots (Pro Plan)
+
+![Bot Report](https://kmf.lol/2021/06/bot-report-pro.png)
+
+<figcaption>Bot report</figcaption>
+
+---
+
+# Bots (Business and above)
+
+![Bot analytics](https://kmf.lol/2021/06/bot-analytics-dashboard-biz.png)
+
+<figcaption>Bot analytics</figcaption>
+
+---
+
+# Cloudflare for SaaS
+
+## **What is it:** Automatic SSL certificate issuance for SaaS providers
+
+## **Pricing:** TBD, in beta for all customers
+
+## **How it works:** Cloudflare Dashboard and API
+
+---
+
+# Cloudflare for SaaS
+
+## Build custom domain support for your SaaS
+
+1. Set up a custom SSL for SaaS subdomain (e.g. `customers.cloudflare.com`)
+2. Allow users to set up custom domains (e.g. `cloudflare.kristians-site.com`)
+3. Issue SSL certificates for your customers' domains
+
+---
+
+# Cloudflare for SaaS
+## Trust me, you don't want to manage this yourself...
+
+- Used by WP Engine, Shopify, Hubspot
+- Run Workers and other optimizations in front of all custom subdomains (!)
+
+---
+
+# Image Resizing
+
+## **What is it:** Automatic image resizing and transformations, available on-demand
+
+## **Pricing:** Available to Business and Enterprise customers
+
+## **How it works:** URL-based API and Cloudflare Workers integration 
+
+---
+
+# Image Resizing
+
+```sh
+https://bytesized.xyz/cdn-cgi/image/OPTIONS/IMAGE-URL
+https://bytesized.xyz/cdn-cgi/image/fit=scale-down,width=1920/image.png
+```
+
+---
+
+# Image Resizing
+
+## Available options:
+
+- Width/Height
+- Device Pixel Ratio
+- Fit (scaling options)
+- Quality
+- Format (automatic WebP support)
+- and many more
+
+---
+
+# Image Resizing
+## Responsive images with `srcset`
+
+```html
+<img src="/cdn-cgi/image/fit=contain,width=960/assets/product.jpg"
+     srcset="/cdn-cgi/image/fit=contain,width=1920/assets/product.jpg 2x">
+```
+
+---
+
+# Image Resizing
+## Usage with Workers
+
+```js
+fetch(imageURL, {
+  cf: {
+    image: {
+      fit: "scale-down",
+      width: 800,
+      height: 600
+    }
+  }
+})
+```
+
+---
+
+# Load Balancing
+
+## **What is it:** Automatic load-balancing between origins
+
+## **Pricing:** Starting at $5/mo
+
+## **How it works:** Configuration in UI and provided load balancer URLs
+
+---
+
+# Load Balancing
+
+<div style={{textAlign: 'left'}}>
+
+## #1 - Set up a load balancer pointing to multiple origins
+
+## #2 - Configure rules for when something goes wrong
+
+#### a) Forward to _first healthy origin_
+
+#### b) Forward to _fastest_ origin
+
+#### c) Forward to _specific geographical origin_
+
+## #3 - Point users at your new load balancer
+
+</div>
+
+---
+
+# Web Application Firewall (WAF)
+
+## **What is it:** Managed rulesets blocking the most common exploits and vulnerabilities in web applications 
+
+## **Pricing:** Free
+
+## **How it works:** Pre-enabled, no configuration needed
+
+---
+
+# Web Application Firewall (WAF)
+
+![Available Rulesets](https://kmf.lol/2021/06/chrome_12IY5Cvkf5.png)
+
+<figcaption>Available WAF rulesets</figcaption>
+
+---
+
+# Web Application Firewall (WAF)
+
+![WAF Changelog](https://kmf.lol/2021/06/chrome_UCQUqhjaMw.png)
+
+<figcaption>WAF Changelog</figcaption>
+
+---
+
+# Waiting Room
+
+## **What is it:** Tools for managing traffic surges via edge-managed queues
+
+## **Pricing:** Business plan and qualified [Project Fair Shot](https://www.cloudflare.com/fair-shot/) customers
+
+## **How it works:** Configuration in Cloudflare Dashboard
+
+---
+
+# Waiting Room
+
+![Waiting Room](https://kmf.lol/2021/06/tegDbOnGhS.png)
+
+<figcaption>The Cloudflare Waiting Room UI</figcaption>
+
+---
+
+# That was a lot...
+
+![Cloudflare Developer Suite](https://kmf.lol/2021/06/chrome_kfqjqy5qrt.png)
+
+<figcaption><a href="https://developers.cloudflare.com">developers.cloudflare.com</a></figcaption>
+
+---
+
+# Thanks!
+## @signalnerve on Twitter
+## kristian@cloudflare.com
+
 </SlidePage>
+

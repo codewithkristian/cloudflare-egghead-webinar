@@ -13,14 +13,14 @@ import { MODES } from '../constants/modes'
 
 const GlobalStyle = createGlobalStyle`
   :root {
-    --bg: #050505;
+    --bg: #fff;
     --meta: #888;
-    --accent: rgb(0, 92, 221);
-    --text: #FAFAFA;
+    --accent: #312E81;
+    --text: #111827;
     --base: 1.5rem;
     --code: 1rem;
     --heading-font-family: "Poppins";
-    --heading-font-weight: 800;
+    --heading-font-weight: semibold;
   }
 
   @media (max-width: 600px) {
@@ -35,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
 
   body,
   html {
-    font-family: "Roboto", -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
       sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-size: var(--base);
     -webkit-font-smoothing: antialiased;
@@ -58,7 +58,7 @@ const GlobalStyle = createGlobalStyle`
     justify-content: center;
     align-items: center;
 
-    width: 100vw;
+    width: 66vw;
     height: 100vh;
     padding: 1rem;
 
@@ -95,6 +95,20 @@ const GlobalStyle = createGlobalStyle`
     top:0.1em;
 }
 
+#slide img {
+  max-height: 600px;
+  max-width: 100%;
+}
+
+#slide figcaption {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 80%;
+}
+
   a {
     color: var(--text);
 
@@ -103,7 +117,6 @@ const GlobalStyle = createGlobalStyle`
 
   blockquote {
     font-size: 120%;
-    font-weight: bold;
 
     width: 50vw;
 
@@ -161,7 +174,7 @@ const GlobalStyle = createGlobalStyle`
 
   h1 {
     font-family: var(--heading-font-family);
-    font-weight: var(--heading-font-weight);
+    font-weight: 600;
     font-size: 200%;
 
     margin-bottom: 0.5rem;
@@ -174,6 +187,8 @@ const GlobalStyle = createGlobalStyle`
 
     margin-bottom: 0.5rem;
   }
+
+  h3, h4 { font-weight: var(--heading-font-weight); }
 
   p {
     margin-top: 1rem;
@@ -210,6 +225,31 @@ const GlobalStyle = createGlobalStyle`
 
   header span {
     color: var(--text);
+  }
+
+  table { 
+    border-spacing: 0px;
+    margin-top: 2rem;
+    width: 100%; 
+  }
+
+  table tbody { text-align: left; }
+
+  th, td { padding: 15px; }
+
+  th {
+    border: 5px solid #eee; 
+    border-right: none;
+  }
+
+  td { 
+    border: 5px solid #eee; 
+    border-top: none;
+    border-right: none;
+  }
+
+  th:last-child, td:last-child {
+    border-right: 5px solid #eee;
   }
 `
 
@@ -349,7 +389,7 @@ export default function SlidePage({ children }) {
         notes={slideNotes()}
         currentSlide={currentSlide}
       >
-        <div id="slide" style={{ width: '100%' }}>
+        <div id="slide" style={{ margin: '0 auto' }}>
           {renderSlide()}
         </div>
       </PresentationMode>

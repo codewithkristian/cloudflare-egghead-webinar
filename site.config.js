@@ -1,9 +1,9 @@
 export const siteConfig = {
-  name: `@whoisryosuke`,
-  title: `NextJS MDX Deck`,
-  date: `April 22, 2020`,
+  name: `@signalnerve`,
+  title: `Exploring the Cloudflare Developer Ecosystem`,
+  date: `June 8, 2021`,
   author: {
-    url: `https://twitter.com/whoisryosuke`,
+    url: `https://twitter.com/signalnerve`,
   },
 }
 
